@@ -1,11 +1,11 @@
 import ReactDOM from "react-dom";
 import React from "react";
-import Benvenuto from "./Benvenuto"
+import App from "./App"
 import './style.css';
 
 ReactDOM.render(
   <React.StrictMode>
-    <Benvenuto />
+    <App />
   </React.StrictMode>,
   document.getElementById('root')
 );
