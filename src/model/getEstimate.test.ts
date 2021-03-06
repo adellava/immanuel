@@ -1,4 +1,5 @@
-import getEsimate, { UserStory } from "./getEstimate";
+import getEsimate from "./getEstimate";
+import { UserStory } from "./entities";
 
 const userStories:Array<UserStory> = [{
     description: "As User, I want to XXX, so YYY",

@@ -1,20 +1,4 @@
-
-interface ProjectEstimate {
-    bestCase: number,
-    buffer: number,
-    estimate: number
-}
-
-export interface UserStory {
-    description: string,
-    note?: string,
-    estimate: UserStoryEstimate
-}
-
-interface UserStoryEstimate {
-    bestCase: number,
-    worstCase: number
-}
+import { UserStory, ProjectEstimate } from "./entities";
 
 const getProjectEstimate = ( userStories: Array<UserStory> ) : ProjectEstimate => {
 
@@ -23,7 +7,7 @@ const getProjectEstimate = ( userStories: Array<UserStory> ) : ProjectEstimate =
         if(userStory.estimate.bestCase < 0) return accumulator; // this should not happen
 
         return accumulator + userStory.estimate.bestCase;
-        
+
     }, 0);
 
     const estimate:number = bestCase + Math.sqrt(userStories.reduce((accumulator, userStory:UserStory):number => {
