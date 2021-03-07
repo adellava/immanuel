@@ -19,7 +19,6 @@ const UserStoriesList = () => {
     };
 
     const onUserStoryChanged = (us:UserStory, index:number) => {
-        console.log(aUserStoryChanged(us, index, userStories));
         setUserStories(aUserStoryChanged(us, index, userStories));
     };
 
