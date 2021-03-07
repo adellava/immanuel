@@ -9,8 +9,7 @@ export interface UserStory {
     note?: string,
     estimate: UserStoryEstimate
 }
-
 export interface UserStoryEstimate {
-    bestCase: number,
+    [bestCase: string]: number,
     worstCase: number
 }
