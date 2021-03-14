@@ -1,27 +1,48 @@
-import { UserStory, ProjectEstimate } from "./entities";
+import { UserStory, UserStoryEstimate, ProjectEstimate } from "./entities";
+
+const getSumOfTheBestCase = (aUserStory:UserStory):number => {
+    return aUserStory.estimate.reduce((accumulator, aDimensionOfEstimate:UserStoryEstimate) => aDimensionOfEstimate.bestCase + accumulator, 0)
+}
+
+const getSumOfTheWorstCase = (aUserStory:UserStory):number => {
+    return aUserStory.estimate.reduce((accumulator, aDimensionOfEstimate:UserStoryEstimate) => aDimensionOfEstimate.worstCase + accumulator, 0)
+}
+
+const roundToTwoDecimal = (aNumber:number) => {
+    return Math.round(aNumber*100)/100;
+}
 
 const getProjectEstimate = ( userStories: Array<UserStory> ) : ProjectEstimate => {
 
-    const bestCase:number = Math.round(userStories.reduce((accumulator, userStory:UserStory):number => {
+    const bestCase:number = roundToTwoDecimal(
+        userStories.reduce((accumulator, userStory:UserStory):number => {
 
-        if(userStory.estimate.bestCase < 0) return accumulator; // this should not happen
+            const userStoryBestCase:number = getSumOfTheBestCase(userStory);
 
-        return accumulator + userStory.estimate.bestCase;
+            if(userStoryBestCase < 0) return accumulator; // this should not happen
 
-    }, 0)*100)/100;
+            return accumulator + userStoryBestCase;
 
-    const buffer = Math.round(Math.sqrt(userStories.reduce((accumulator, userStory:UserStory):number => {
+        }, 0)
+    );
 
-        const bestCaseIsGreaterThanWorstCase = userStory.estimate.worstCase < userStory.estimate.bestCase;
-        const numbersAreNegative = userStory.estimate.worstCase < 0 || userStory.estimate.bestCase < 0;
+    const buffer = roundToTwoDecimal(
+        Math.sqrt(userStories.reduce((accumulator, userStory:UserStory):number => {
 
-        if(bestCaseIsGreaterThanWorstCase || numbersAreNegative) return accumulator; // this should not happen
+            const userStoryBestCase:number = getSumOfTheBestCase(userStory);
+            const userStoryWorstCase:number = getSumOfTheWorstCase(userStory);
 
-        const userStoryBuffer = userStory.estimate.worstCase - userStory.estimate.bestCase;
-        return accumulator + Math.pow(userStoryBuffer, 2);
-    }, 0)) * 100)/100;
+            const bestCaseIsGreaterThanWorstCase = userStoryWorstCase < userStoryBestCase;
+            const numbersAreNegative = userStoryWorstCase < 0 || userStoryBestCase < 0;
 
-    const estimate:number = Math.round( (bestCase + buffer) * 100 )/100;
+            if(bestCaseIsGreaterThanWorstCase || numbersAreNegative) return accumulator; // this should not happen
+
+            const userStoryBuffer = userStoryWorstCase - userStoryBestCase;
+            return accumulator + Math.pow(userStoryBuffer, 2);
+        }, 0)) 
+    );
+
+    const estimate:number = roundToTwoDecimal( bestCase + buffer );
 
     return {
         bestCase,

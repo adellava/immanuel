@@ -7,7 +7,7 @@ export interface ProjectEstimate {
 export interface UserStory {
     description: string,
     note?: string,
-    estimate: UserStoryEstimate
+    estimate: UserStoryEstimate[]
 }
 export interface UserStoryEstimate {
     [bestCase: string]: number,
