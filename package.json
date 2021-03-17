@@ -1,6 +1,6 @@
 {
   "name": "immanuel",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "project estimation tool",
   "main": "index.js",
   "scripts": {
