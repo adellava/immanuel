@@ -1,6 +1,5 @@
-import { UserStory, UserStoryEstimate } from "../../model/entities";
+import { UserStory, UserStoryEstimate } from "model/entities";
 
-export const MAX_PROJECT_DIMENSIONS = 4;
 export const MIN_PROJECT_DIMENSIONS = 1;
 export const DEFAULT_DIMENSIONS_LABELS = [
     "backend",
@@ -8,6 +7,7 @@ export const DEFAULT_DIMENSIONS_LABELS = [
     "UX",
     "cloud architecture"
 ];
+export const MAX_PROJECT_DIMENSIONS = DEFAULT_DIMENSIONS_LABELS.length;
 
 const userStoryEstimateFactory = ():UserStoryEstimate => {
     return {

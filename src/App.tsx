@@ -1,5 +1,5 @@
 import React from "react";
-import UserStoriesList from "./pages/UserStoriesList";
+import UserStoriesList from "pages/UserStoriesList";
 
 const Benvenuto = () => {
       return <div>

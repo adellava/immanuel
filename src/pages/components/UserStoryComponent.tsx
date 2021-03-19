@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { UserStory, UserStoryEstimate } from "../../model/entities";
+import React from "react";
+import { UserStory, UserStoryEstimate } from "model/entities";
 
 interface UserStoryComponentProps {
     userStory: UserStory,

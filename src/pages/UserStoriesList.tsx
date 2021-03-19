@@ -1,9 +1,9 @@
-import React, { useState, useCallback, useEffect } from "react";
-import UserStoryComponent from "./components/UserStoryComponent";
-import ProjectEstimateComponent from "./components/ProjectEstimateComponent";
-import UserStoriesHeaderComponent from "./components/UserStoriesHeaderComponent";
-import ProjectDimensionsComponent from "./components/ProjectDimensionsComponent";
-import { UserStory, ProjectEstimate } from "../model/entities";
+import React, { useState, useEffect } from "react";
+import UserStoryComponent from "pages/components/UserStoryComponent";
+import ProjectEstimateComponent from "pages/components/ProjectEstimateComponent";
+import UserStoriesHeaderComponent from "pages/components/UserStoriesHeaderComponent";
+import ProjectDimensionsComponent from "pages/components/ProjectDimensionsComponent";
+import { UserStory, ProjectEstimate } from "model/entities";
 import { 
     aUserStoryChanged,
     aUserStoryDeleted,
@@ -16,8 +16,8 @@ import {
     MAX_PROJECT_DIMENSIONS,
     MIN_PROJECT_DIMENSIONS,
     DEFAULT_DIMENSIONS_LABELS
-} from "./model/UserStoriesListModel";
-import getProjectEstimate from "../model/getEstimate";
+} from "pages/model/UserStoriesListModel";
+import getProjectEstimate from "model/getEstimate";
 
 const UserStoriesList = () => {
 

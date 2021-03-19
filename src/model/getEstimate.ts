@@ -1,4 +1,4 @@
-import { UserStory, UserStoryEstimate, ProjectEstimate } from "./entities";
+import { UserStory, UserStoryEstimate, ProjectEstimate } from "model/entities";
 
 const getSumOfTheBestCase = (aUserStory:UserStory):number => {
     return aUserStory.estimate.reduce((accumulator, aDimensionOfEstimate:UserStoryEstimate) => aDimensionOfEstimate.bestCase + accumulator, 0)

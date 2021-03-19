@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { ProjectEstimate } from "../../model/entities";
+import React from "react";
+import { ProjectEstimate } from "model/entities";
 
 interface ProjectEstimateProps {
     projectEstimate: ProjectEstimate
