@@ -1,5 +1,6 @@
 import React from "react";
 import { UserStory, UserStoryEstimate } from "model/entities";
+import UserStoryEstimateComponent from "pages/components/UserStoryEstimateComponent";
 
 interface UserStoryComponentProps {
     userStory: UserStory,
@@ -43,17 +44,8 @@ const UserStoryComponent = ( { userStory, index, onUserStoryChanged, onUserStory
         <label>
             <input value={userStory.description} type="text" name="description" placeholder="as a user I want to ... so that ...." style={{width: "250px", marginRight: "20px"}} onChange={onFormChange}/>
         </label>
-        {userStory.estimate.map((anEstimateDimension:UserStoryEstimate, i) => {
-            return  <div  style={{width: "271px", height: "20px", display: "inline-block"}} key={`key-${i}`}>
-                <label>
-                    best case
-                    <input type="number" name="bestCase" min="0" max="13" step="0.5" value={anEstimateDimension.bestCase}  onChange={(event) => onFormChange(event, i)}/>
-                </label>
-                <label>
-                    worst case
-                    <input type="number" name="worstCase" min="0" max="13" step="0.5" value={anEstimateDimension.worstCase}  onChange={(event) => onFormChange(event, i)}/>
-                </label>
-            </div>;
+        {userStory.estimate.map((aUserStoryEstimate:UserStoryEstimate, i) => {
+            return  <UserStoryEstimateComponent key={`key-${i}`} userStoryEstimate={aUserStoryEstimate} onUserStoryEstimateChanged={(event) => onFormChange(event, i)}/>;
         })}
         <div style={{width: "100px", height: "20px", display: "inline-block"}}>
             <button onClick={onDelete}>
