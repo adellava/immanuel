@@ -1,8 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
 import { ProjectEstimate } from "model/entities";
 import getSprintsRangeEsimate from "model/getSprintsRangeEsimate";
 import getMoneyRangeEstimate from "model/getMoneyRangeEstimate";
 import { currencyFormatter } from "model/formatters";
+
+const isAValidNumber = (value:any) => {
+    const floatValue = Number.parseInt(value);
+    const isFinite = Number.isFinite(floatValue);
+    return isFinite;
+};
+
+const parseEvent = (event:React.ChangeEvent<HTMLInputElement>):number => {
+    const newValue = isAValidNumber(event.target.value) ? Number.parseInt(event.target.value) : "";
+    const valueParsed = newValue as number;
+    return valueParsed;
+};
 
 const MAX_EFFORT_PER_SPRINT = 40;
 const MIN_EFFORT_PER_SPRINT = 1;
@@ -19,26 +31,52 @@ interface ProjectEstimateProps {
 
 const ProjectEstimateComponent = ( { projectEstimate, effortPerSprint, costPerEffortUnit, onEffortPerSprintChanged, onCostPerEffortUnitChanged } : ProjectEstimateProps ) => {
 
+
+    const  [_effortPerSprint, setEffortPerSprint] = useState<number>(effortPerSprint);
+    const  [_costPerEffortUnit, setCostPerEffortUnit] = useState<number>(costPerEffortUnit);
+
     const sprintsRangeProjectEstimate = getSprintsRangeEsimate(projectEstimate, effortPerSprint);
     const moneyRangeProjectEstimate = getMoneyRangeEstimate(projectEstimate, effortPerSprint, costPerEffortUnit);
 
-    const efforPerSprintChanged = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const effortPerSprintValid = (newValue:number) => !!newValue && newValue > MIN_EFFORT_PER_SPRINT && newValue < MAX_EFFORT_PER_SPRINT;
+    const effortPerSprintChanged = (event: React.ChangeEvent<HTMLInputElement>) => {
 
-        const newValue:number = Number.parseInt(event.target.value);
+        const newValue = parseEvent(event);
+        setEffortPerSprint(newValue);
 
-        if(!newValue || newValue < MIN_EFFORT_PER_SPRINT || newValue > MAX_EFFORT_PER_SPRINT) return;
+        if(effortPerSprintValid(newValue)) onEffortPerSprintChanged(newValue);
 
+    };
+    const effortPerSprintBlur = (event: React.ChangeEvent<HTMLInputElement>) => {
+
+        let newValue:number = parseEvent(event);
+
+        if(newValue < MIN_EFFORT_PER_SPRINT) newValue = MIN_EFFORT_PER_SPRINT;
+        if(newValue > MAX_EFFORT_PER_SPRINT) newValue = MAX_EFFORT_PER_SPRINT;
+        setEffortPerSprint(newValue);
         onEffortPerSprintChanged(newValue);
 
     };
 
+
+    const costPerUnitValid = (newValue:number) => !!newValue && newValue > MIN_COST_PER_EFFORT_UNIT && newValue < MAX_COST_PER_EFFORT_UNIT;
     const costPerUnitChanged = (event: React.ChangeEvent<HTMLInputElement>) => {
 
-        const newValue:number = Number.parseInt(event.target.value);
+        const newValue:number = parseEvent(event);
+        setCostPerEffortUnit(newValue);
 
-        if(!newValue || newValue < MIN_COST_PER_EFFORT_UNIT || newValue > MAX_COST_PER_EFFORT_UNIT) return;
+        if(costPerUnitValid(newValue)) onCostPerEffortUnitChanged(newValue);
 
+    };
+    const costPerUnitBlur = (event: React.ChangeEvent<HTMLInputElement>) => {
+
+        let newValue:number = parseEvent(event);
+
+        if(newValue < MIN_COST_PER_EFFORT_UNIT) newValue = MIN_COST_PER_EFFORT_UNIT;
+        if(newValue > MAX_COST_PER_EFFORT_UNIT) newValue = MAX_COST_PER_EFFORT_UNIT;
+        setCostPerEffortUnit(newValue);
         onCostPerEffortUnitChanged(newValue);
+
     };
 
     return <table style={{width: 1000, textAlign: "right"}}>
@@ -55,11 +93,11 @@ const ProjectEstimateComponent = ( { projectEstimate, effortPerSprint, costPerEf
                     <td>Hypotesis</td>
                     <td>
                         Cost per Unit
-                        <input type="number" step="1" min={MIN_COST_PER_EFFORT_UNIT} max={MAX_COST_PER_EFFORT_UNIT} value={costPerEffortUnit} onChange={costPerUnitChanged} />
+                        <input type="number" step="1" min={MIN_COST_PER_EFFORT_UNIT} max={MAX_COST_PER_EFFORT_UNIT} value={_costPerEffortUnit} onChange={costPerUnitChanged} onBlur={costPerUnitBlur} />
                     </td>
                     <td>
                         Team Effort per Sprint 
-                        <input type="number" step="1" min={MIN_EFFORT_PER_SPRINT} max={MAX_EFFORT_PER_SPRINT} value={sprintsRangeProjectEstimate.teamEffortPerSprint} onChange={efforPerSprintChanged}/>
+                        <input type="number" step="1" min={MIN_EFFORT_PER_SPRINT} max={MAX_EFFORT_PER_SPRINT} value={_effortPerSprint} onChange={effortPerSprintChanged} onBlur={effortPerSprintBlur} />
                     </td>
                     <td>
                         Cost per Sprint
