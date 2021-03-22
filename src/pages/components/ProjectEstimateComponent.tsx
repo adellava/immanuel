@@ -7,7 +7,7 @@ import { currencyFormatter } from "model/formatters";
 const MAX_EFFORT_PER_SPRINT = 40;
 const MIN_EFFORT_PER_SPRINT = 1;
 
-const MAX_COST_PER_EFFORT_UNIT = 40;
+const MAX_COST_PER_EFFORT_UNIT = 1000;
 const MIN_COST_PER_EFFORT_UNIT = 1;
 interface ProjectEstimateProps {
     projectEstimate: ProjectEstimate,
