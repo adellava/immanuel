@@ -7,7 +7,9 @@ import { UserStory, ProjectEstimate } from "model/entities";
 import { 
     aUserStoryChanged,
     aUserStoryDeleted,
-    addNewUserStory,
+    addNewUserStory
+} from "pages/model/UserStoriesListModel";
+import { 
     removeLastDimension,
     addDimension,
     aDimensionLabelChenged,
@@ -16,7 +18,7 @@ import {
     MAX_PROJECT_DIMENSIONS,
     MIN_PROJECT_DIMENSIONS,
     DEFAULT_DIMENSIONS_LABELS
-} from "pages/model/UserStoriesListModel";
+} from "pages/model/ProjectDimensionsModel";
 import getProjectEstimate from "model/getEstimate";
 
 const UserStoriesList = () => {

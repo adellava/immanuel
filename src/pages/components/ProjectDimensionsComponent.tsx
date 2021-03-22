@@ -1,6 +1,6 @@
 import React from "react";
 import { UserStory } from "model/entities";
-import { getProjectDimensions } from "pages/model/UserStoriesListModel";
+import { getProjectDimensions } from "pages/model/ProjectDimensionsModel";
 
 interface ProjectDimensionsProps {
     userStories: UserStory[],

@@ -4,7 +4,7 @@
   "description": "project estimation tool",
   "main": "index.js",
   "scripts": {
-    "test": "jest src",
+    "test": "jest --modulePaths=src",
     "test-watch": "npm run test -- --watch",
     "build": "webpack --config config/webpack.prod.js",
     "start": "webpack serve --open --config config/webpack.dev.js"
