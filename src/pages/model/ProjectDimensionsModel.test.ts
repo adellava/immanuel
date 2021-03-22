@@ -59,18 +59,27 @@ test('getProjectDimensions should return the dimension number from a list of use
     expect(dimensionsNumber).toBe(2);
 });
 
-test('removeLastDimension should remove the last dimension from a list of user stories', () => {
+test('removeLastDimension should remove the last dimension from a list of user stories untill the MIN_PROJECT_DIMENSIONS is reached', () => {
     const aListOfUserStories = JSON.parse(JSON.stringify(userStories));
     expect( getProjectDimensions( aListOfUserStories ) ).toBe(2);
     const newUserStories = removeLastDimension(aListOfUserStories);
-    expect( getProjectDimensions(newUserStories) ).toBe(1);
+    expect( getProjectDimensions(newUserStories) ).toBe(MIN_PROJECT_DIMENSIONS);
+
+    const newUserStories1 = removeLastDimension(newUserStories);
+    expect( getProjectDimensions(newUserStories1) ).toBe(MIN_PROJECT_DIMENSIONS);
 });
 
-test('addDimension should add a dimension in a list of user stories', () => {
+test('addDimension should add a dimension in a list of user stories untill the MAX_PROJECT_DIMENSIONS is reached', () => {
     const aListOfUserStories = JSON.parse(JSON.stringify(userStories));
     expect( getProjectDimensions( aListOfUserStories) ).toBe(2);
     const newUserStories = addDimension( aListOfUserStories );
     expect( getProjectDimensions( newUserStories) ).toBe(3);
+
+    const newUserStories1 = addDimension( newUserStories );
+    expect( getProjectDimensions( newUserStories1) ).toBe(MAX_PROJECT_DIMENSIONS);
+
+    const newUserStories2 = addDimension( newUserStories1 );
+    expect( getProjectDimensions( newUserStories2) ).toBe(MAX_PROJECT_DIMENSIONS);
 });
 
 test('aDimensionLabelChenged should update the dimension label at given index', () => {
