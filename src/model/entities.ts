@@ -4,6 +4,12 @@ export interface ProjectEstimate {
     estimate: number
 }
 
+export interface SprintsRangeProjectEstimate extends ProjectEstimate {
+    teamEffortPerSprint: number
+}
+export interface MoneyRangeProjectEstimate extends ProjectEstimate {
+    costPerSprint: number
+}
 export interface UserStory {
     description: string,
     note?: string,

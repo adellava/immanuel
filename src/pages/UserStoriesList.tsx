@@ -23,6 +23,8 @@ import getProjectEstimate from "model/getEstimate";
 
 const UserStoriesList = () => {
 
+    const  [effortPerSprint, setEffortPerSprint] = useState<number>(10);
+    const  [costPerEffortUnit, setCostPerEffortUnit] = useState<number>(1000);
     const  [userStories, setUserStories] = useState<UserStory[]>([]);
     const  [dimensionsLabels, setDimensionsLabels] = useState<string[]>([ DEFAULT_DIMENSIONS_LABELS[0] ]);
     const  [projectEstimate, setProjectEstimate] = useState<ProjectEstimate>({
@@ -30,6 +32,14 @@ const UserStoriesList = () => {
         estimate: 0,
         buffer: 0
     });
+
+    const onCostPerEffortUnitChanged = (newValue:number) => {
+        setCostPerEffortUnit(newValue);
+    };
+
+    const onEffortPerSprintChanged = (newValue:number) => {
+        setEffortPerSprint(newValue);
+    };
 
     const addUserStory = () => {
         setUserStories(addNewUserStory(userStories));
@@ -62,7 +72,13 @@ const UserStoriesList = () => {
     }, [userStories])
 
     return <div>
-        <ProjectEstimateComponent projectEstimate={projectEstimate} />
+        <ProjectEstimateComponent 
+            projectEstimate={projectEstimate}
+            effortPerSprint={effortPerSprint}
+            costPerEffortUnit={costPerEffortUnit}
+            onEffortPerSprintChanged={onEffortPerSprintChanged}
+            onCostPerEffortUnitChanged={onCostPerEffortUnitChanged}
+        />
         <ProjectDimensionsComponent 
             userStories={userStories}
             onAddDimension={onAddDimension}

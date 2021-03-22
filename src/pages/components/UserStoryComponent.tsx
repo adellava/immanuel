@@ -2,6 +2,8 @@ import React from "react";
 import { UserStory, UserStoryEstimate } from "model/entities";
 import UserStoryEstimateComponent from "pages/components/UserStoryEstimateComponent";
 
+const isANumber = (value:any) => Number.isFinite(Number.parseFloat(value));
+
 interface UserStoryComponentProps {
     userStory: UserStory,
     index: number,
@@ -26,11 +28,16 @@ const UserStoryComponent = ( { userStory, index, onUserStoryChanged, onUserStory
             default:
                 const key:string = e.target.name;
                 const estimateIndex = anEstimateIndex ? anEstimateIndex : 0;
-                newUserStory.estimate[estimateIndex][key] = Number.parseFloat(e.target.value);
+                const newValue = isANumber(e.target.value) ? Number.parseFloat(e.target.value) : 0;
+                newUserStory.estimate[estimateIndex][key] = newValue;
 
-                if(key === "bestCase" && newUserStory.estimate[estimateIndex]["worstCase"] < newUserStory.estimate[estimateIndex][key]) {
-                    newUserStory.estimate[estimateIndex]["worstCase"] = Number.parseFloat(e.target.value);
+                if(key === "bestCase" && newUserStory.estimate[estimateIndex]["worstCase"] < newUserStory.estimate[estimateIndex]["bestCase"]) {
+                    newUserStory.estimate[estimateIndex]["worstCase"] = newValue;
                 }
+                if(key === "worstCase" && newUserStory.estimate[estimateIndex]["worstCase"] < newUserStory.estimate[estimateIndex]["bestCase"]) {
+                    newUserStory.estimate[estimateIndex]["bestCase"] = newValue;
+                }
+
         }
 
         onUserStoryChanged(newUserStory, index);
