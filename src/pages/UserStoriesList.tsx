@@ -20,6 +20,8 @@ import {
     DEFAULT_DIMENSIONS_LABELS
 } from "pages/model/ProjectDimensionsModel";
 import getProjectEstimate from "model/getEstimate";
+import saveDocumentAsFile from "model/saveDocumentAsFile";
+import openFileAsDocument, { openFileAsDocumentCallbackParams } from "model/openFileAsDocument";
 
 const UserStoriesList = () => {
 
@@ -67,11 +69,34 @@ const UserStoriesList = () => {
         setDimensionsLabels(aDimensionLabelChenged(dimensionsLabels, newLabel, index));
     };
 
+    const save = () => {
+        saveDocumentAsFile({
+            effortPerSprint,
+            costPerEffortUnit,
+            userStories,
+            dimensionsLabels
+        });
+    };
+
+    const open = () => {
+        
+        const onDocumentOpen = (aDocument:openFileAsDocumentCallbackParams) => {
+            setEffortPerSprint(aDocument.effortPerSprint);
+            setCostPerEffortUnit(aDocument.costPerEffortUnit);
+            setDimensionsLabels(aDocument.dimensionsLabels);
+            setUserStories(aDocument.userStories);
+        };
+
+        openFileAsDocument({ onDocumentOpen });
+    };
+
     useEffect(() => {
         setProjectEstimate(getProjectEstimate(userStories));
     }, [userStories])
 
     return <div>
+        <button onClick={save}>save</button>
+        <button onClick={open}>open</button>
         <ProjectEstimateComponent 
             projectEstimate={projectEstimate}
             effortPerSprint={effortPerSprint}
