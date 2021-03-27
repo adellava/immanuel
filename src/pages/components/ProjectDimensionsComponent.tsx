@@ -1,6 +1,8 @@
 import React from "react";
 import { UserStory } from "model/entities";
 import { getProjectDimensions } from "pages/model/ProjectDimensionsModel";
+import Grid from "components/Grid";
+import Button from "components/Button";
 
 interface ProjectDimensionsProps {
     userStories: UserStory[],
@@ -20,8 +22,8 @@ const ProjectDimensionsComponent = ( { userStories, maxProjectDimensions, minPro
     return <div> 
         <em>Dimensions:</em> {numberOfDimensions} 
         
-        <button disabled={isAddDimensionDisabled()} onClick={onAddDimension}>add dimension</button>
-        <button disabled={isRemoveLastDimensionDisabled()} onClick={onRemoveLastDimension}>remove last dimension</button>
+        <Button disabled={isAddDimensionDisabled()} small={true} onClick={onAddDimension} label="add dimension" />
+        <Button disabled={isRemoveLastDimensionDisabled()} small={true} onClick={onRemoveLastDimension}label="remove last dimension" />
     </div>;
 }
 

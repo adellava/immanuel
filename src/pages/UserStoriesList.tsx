@@ -131,7 +131,7 @@ const UserStoriesList = () => {
         </div>
         {userStories.length === 0 && <div>No user stories to estimate</div>}
         <Grid px={1} py={1}>
-            <Button onClick={() => addUserStory()} label="Add User Story" />
+            <Button onClick={addUserStory} label="Add User Story" primary={true}/>
         </Grid>
     </div>;
 }
