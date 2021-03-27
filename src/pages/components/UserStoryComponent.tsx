@@ -4,7 +4,7 @@ import UserStoryEstimateComponent from "pages/components/UserStoryEstimateCompon
 import "pages/components/UserStoryComponent.scss";
 
 const MAX_ESTIMATE_VALUE = 13;
-const MIN_ESTIMATE_VALUE = 1;
+const MIN_ESTIMATE_VALUE = 0;
 
 const isAValidNumber = (value:any) => {
     const floatValue = Number.parseFloat(value);
