@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { UserStory, UserStoryEstimate } from "model/entities";
 import UserStoryEstimateComponent from "pages/components/UserStoryEstimateComponent";
+import "pages/components/UserStoryComponent.scss";
 
 const MAX_ESTIMATE_VALUE = 13;
 const MIN_ESTIMATE_VALUE = 1;
@@ -95,20 +96,22 @@ const UserStoryComponent = ( { userStory, index, onUserStoryChanged, onUserStory
         onUserStoryDeleted(index);
     }
 
-    return <div>
-        <label>
-            <input value={userStoryForm.description} type="text" name="description" placeholder="as a user I want to ... so that ...." style={{width: "250px", marginRight: "20px"}} onChange={onFormChange}/>
+    return <div className="user-story">
+        <label className="user-story__description">
+            <input value={userStoryForm.description} type="text" name="description" placeholder="as a user I want to ... so that ...." onChange={onFormChange}/>
         </label>
-        {userStoryForm.estimate.map((aUserStoryEstimate:UserStoryEstimate, i) => {
-            return  <UserStoryEstimateComponent
-                key={`key-${i}`}
-                maxEstimateValue={MAX_ESTIMATE_VALUE}
-                minEstimateValue={MAX_ESTIMATE_VALUE}
-                userStoryEstimate={aUserStoryEstimate}
-                onUserStoryEstimateChanged={(event) => onFormChange(event, i)}
-                onUserStoryEstimateBlur={(event) => onFormBlur(event, i)}/>;
-        })}
-        <div style={{width: "100px", height: "20px", display: "inline-block"}}>
+        <div className="user-story__estimate">
+            {userStoryForm.estimate.map((aUserStoryEstimate:UserStoryEstimate, i) => {
+                return  <UserStoryEstimateComponent
+                    key={`key-${i}`}
+                    maxEstimateValue={MAX_ESTIMATE_VALUE}
+                    minEstimateValue={MAX_ESTIMATE_VALUE}
+                    userStoryEstimate={aUserStoryEstimate}
+                    onUserStoryEstimateChanged={(event) => onFormChange(event, i)}
+                    onUserStoryEstimateBlur={(event) => onFormBlur(event, i)}/>;
+            })}
+        </div>
+        <div className="user-story__actions">
             <button onClick={onDelete} tabIndex={-1}>
                 delete
             </button>
