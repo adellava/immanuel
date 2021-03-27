@@ -1,0 +1,85 @@
+@import "styles/variables";
+@import "styles/elevation";
+
+$btnColor: $primary;
+
+.button {
+  
+  @include elevation(1);
+  text-transform: uppercase;
+  border: none;
+  background-color: transparent;
+  font-family: $font-family-sans-serif;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  align-self: start;
+  background-color: $white;
+  color: $btnColor;
+  border: 1px solid $btnColor;
+  border-radius: $border-radius-sm;
+  padding: 0.25rem 0.55rem;
+  min-width: 10ch;
+  min-height: 40px;
+  text-align: center;
+  line-height: 1.1;
+  font-size: 0.75rem;
+
+  &:hover,
+  &:active {
+    @include elevation(4);
+  }
+
+  &:focus {
+    outline-style: solid;
+    outline-color: transparent;
+    background-color: scale-color($white, $lightness: -10%);
+  }
+
+  &:disabled {
+    border: 1px solid $gray-400;
+    color: $gray-400;
+    @include elevation(0);
+  }
+
+  &--small {
+    padding: 0.15rem 0.35rem;
+    min-height: 32px;
+    text-transform: capitalize;
+    min-width: 6ch;
+  }
+
+  &--primary {
+    background-color: $btnColor;
+    color: $white;
+    border: none;
+
+    &:disabled {
+      color: $gray-400;
+      background: $gray-200;
+      @include elevation(0);
+    }
+
+    &:focus {
+      outline-style: solid;
+      outline-color: transparent;
+      background-color: scale-color($white, $lightness: -70%);
+    }
+  }
+  @media print {
+    display: none;
+  }
+}
+
+@each $name, $hex in $theme-colors {
+  .button_modifier-color-#{$name} {
+    border: 1px solid $hex;
+    color: $hex;
+  }
+  .button--primary.root--color-#{$name} {
+    background-color: $hex;
+    color: $white;
+    border: 1px solid $white;
+  }
+}

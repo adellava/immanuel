@@ -1,0 +1,89 @@
+$bar-height: 2rem;
+
+$white: #fff !default;
+$gray-100: #f9f9f9 !default;
+$gray-200: #ededee !default;
+$gray-300: #e0e0e0 !default;
+$gray-400: #d2d2d3 !default;
+$gray-500: #c3c2c4 !default;
+$gray-600: #b2b2b3 !default;
+$gray-700: #9f9ea0 !default;
+$gray-800: #888789 !default;
+$gray-900: #6b6a6c !default;
+$dark-grey: #3f3d3d !default;
+$black: #212121 !default;
+
+$grays: () !default;
+$grays: map-merge(
+  (
+    "100": $gray-100,
+    "200": $gray-200,
+    "300": $gray-300,
+    "400": $gray-400,
+    "500": $gray-500,
+    "600": $gray-600,
+    "700": $gray-700,
+    "800": $gray-800,
+    "900": $gray-900,
+    "dark": $dark-grey,
+  ),
+  $grays
+);
+
+$primary: $black !default;
+$light-primary: $gray-200 !default;
+$secondary: #651fff !default;
+$info: #2c4dc0;
+$accent: $secondary !default;
+$success: #188744 !default;
+$warning: #f8b60e !default;
+$danger: #c02c50 !default;
+$neutral: $gray-800;
+$disabled: $gray-600;
+
+$theme-colors: () !default;
+$theme-colors: map-merge(
+  (
+    "Primary": $primary,
+    "Secondary": $secondary,
+    "Success": $success,
+    "Info": $info,
+    "Warning": $warning,
+    "Danger": $danger,
+    "Neutral": $neutral,
+  ),
+  $theme-colors
+);
+
+@mixin for-tablet-only {
+  @media (max-width: 1199px) {
+    @content;
+  }
+}
+@mixin for-desktop-up {
+  @media (min-width: 1200px) {
+    @content;
+  }
+}
+@mixin for-big-desktop-up {
+  @media (min-width: 1800px) {
+    @content;
+  }
+}
+// Fonts
+//
+// Font, line-height, and color for body text, headings, and more.
+
+// stylelint-disable value-keyword-case
+$font-family-sans-serif: "Open Sans", -apple-system, BlinkMacSystemFont,
+  "Segoe UI", "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji",
+  "Segoe UI Emoji", "Segoe UI Symbol" !default;
+$font-family-sans-serif-featured: "Open Sans Semibold", $font-family-sans-serif;
+$font-family-sans-serif-bold: "Open Sans Bold", $font-family-sans-serif;
+$font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas,
+  "Liberation Mono", "Courier New", monospace !default;
+$font-family-base: $font-family-sans-serif !default;
+
+$border-radius-sm: 8px;
+$border-radius-md: 12px;
+$border-radius-lg: 16px;

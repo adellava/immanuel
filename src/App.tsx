@@ -1,5 +1,6 @@
 import React from "react";
 import UserStoriesList from "pages/UserStoriesList";
+import "styles/shared.scss";
 
 const Benvenuto = () => {
       return <div>

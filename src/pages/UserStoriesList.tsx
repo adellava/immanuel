@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import Button from "components/Button";
+import Grid from "components/Grid";
 import UserStoryComponent from "pages/components/UserStoryComponent";
 import ProjectEstimateComponent from "pages/components/ProjectEstimateComponent";
 import UserStoriesHeaderComponent from "pages/components/UserStoriesHeaderComponent";
@@ -95,8 +97,11 @@ const UserStoriesList = () => {
     }, [userStories])
 
     return <div>
-        <button onClick={save}>save</button>
-        <button onClick={open}>open</button>
+        <Grid px={1} py={1}>
+            <Button onClick={save} label="Save" />
+            <Button onClick={open} label="Open" />
+        </Grid>
+
         <ProjectEstimateComponent 
             projectEstimate={projectEstimate}
             effortPerSprint={effortPerSprint}
@@ -125,9 +130,9 @@ const UserStoriesList = () => {
             />)}
         </div>
         {userStories.length === 0 && <div>No user stories to estimate</div>}
-        <button onClick={() => addUserStory()}>
-            Add User Story
-        </button>
+        <Grid px={1} py={1}>
+            <Button onClick={() => addUserStory()} label="Add User Story" />
+        </Grid>
     </div>;
 }
 
